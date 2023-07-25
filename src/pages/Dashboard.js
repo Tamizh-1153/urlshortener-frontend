@@ -7,6 +7,7 @@ const Dashboard = () => {
   const token = localStorage.getItem("token")
   const [data, setData] = useState(null)
 
+  /* eslint-disable */
   useEffect(() => {
     if (token == null) {
       refresh("/login")
@@ -14,6 +15,7 @@ const Dashboard = () => {
       fetchData()
     }
   }, [setData])
+  /* eslint-enable */
 
   const fetchData = async () => {
     await axios
@@ -25,18 +27,24 @@ const Dashboard = () => {
       .then((response) => setData(response.data.shortUrls))
   }
 
-   const handleSignOut = () => {
-     refresh("/login")
-     localStorage.removeItem("token")
-   }
+  const handleSignOut = () => {
+    refresh("/login")
+    localStorage.removeItem("token")
+  }
 
   return (
     <>
-    <div style={{display:'flex',justifyContent:'flex-end',margin:'50px'}}>
-      <button className="btn btn-primary" onClick={handleSignOut}>Log out</button>
-    </div>
-    <p style={{display:'flex',justifyContent:'center',fontSize:30}}>Dashboard</p>
-      <div style={{margin:'50px'}}>
+      <div
+        style={{ display: "flex", justifyContent: "flex-end", margin: "50px" }}
+      >
+        <button className="btn btn-primary" onClick={handleSignOut}>
+          Log out
+        </button>
+      </div>
+      <p style={{ display: "flex", justifyContent: "center", fontSize: 30 }}>
+        Dashboard
+      </p>
+      <div style={{ margin: "50px" }}>
         <table className="table">
           <thead>
             <tr>
@@ -65,7 +73,7 @@ const Dashboard = () => {
           </tbody>
         </table>
       </div>
-      <Link to="/UrlShortener" style={{textDecoration:'none'}}>
+      <Link to="/UrlShortener" style={{ textDecoration: "none" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button className="btn btn-primary">URL Shortener</button>
         </div>

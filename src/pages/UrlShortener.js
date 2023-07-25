@@ -3,41 +3,42 @@ import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 const UrlShortner = () => {
-
   const refresh = useNavigate()
   const token = localStorage.getItem("token")
 
-   const handleSubmit = (e) => {
-     e.preventDefault()
-     const sendURL = e.target.url.value
-     console.log(e.target.url.value)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const sendURL = e.target.url.value
+    console.log(e.target.url.value)
 
-     axios.post(`${process.env.REACT_APP_BACKEND_URL}/shortUrl`, {url:sendURL}, {
-       headers: {
-         Authorization: `Bearer ${localStorage.getItem("token")}`,
-       },
-     }).then(response =>{
-      alert(response.data.message)
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/shortUrl`,
+        { url: sendURL },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        alert(response.data.message)
+      })
+      .catch((error) => alert(error.message))
+  }
 
-     }).catch(error =>alert(error.message));
-
-
-
-
-   }
-
+   /* eslint-disable */
   useEffect(() => {
     if (token == null) {
       refresh("/login")
-    } 
+    }
   }, [])
+  /* eslint-enable */
 
   const handleSignOut = () => {
     refresh("/login")
     localStorage.removeItem("token")
   }
-
- 
 
   return (
     <>
@@ -48,7 +49,10 @@ const UrlShortner = () => {
           margin: "50px",
         }}
       >
-        <button className="btn btn-primary" onClick={()=>refresh('/dashboard')}>
+        <button
+          className="btn btn-primary"
+          onClick={() => refresh("/dashboard")}
+        >
           Back
         </button>
         <button className="btn btn-primary" onClick={handleSignOut}>

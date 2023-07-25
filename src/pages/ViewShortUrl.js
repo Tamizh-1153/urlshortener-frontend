@@ -4,40 +4,37 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
 
 const ViewShortUrl = () => {
+  const [data, setData] = useState(null)
+  const refresh = useNavigate()
+  const token = localStorage.getItem("token")
 
-    const [data,setData]=useState(null)
-    const refresh=useNavigate()
-    const token = localStorage.getItem("token")
+  const { shortUrl } = useParams()
 
-    const {shortUrl}=useParams()
+  const fetchData = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/${shortUrl}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((response) => setData(response.data))
+  }
+  console.log(data)
+  if (data !== null) {
+    window.location.href = data
+  }
 
-    useEffect(() => {
-       if (token == null) {
-         refresh("/login")
-       } else {
-         fetchData()
-       }
-
-    },[setData])
-
-    const fetchData = async() =>{
-
-        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/${shortUrl}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }).then(response =>setData(response.data))
-
+  /* eslint-disable */
+  useEffect(() => {
+    if (token == null) {
+      refresh("/login")
+    } else {
+      fetchData()
     }
-    console.log(data)
-    if(data!==null){
-        window.location.href=data
-    }
+  }, [setData])
+  /* eslint-enable */
 
-
-  return (
-    <div></div>
-  )
+  return <div></div>
 }
 
 export default ViewShortUrl
