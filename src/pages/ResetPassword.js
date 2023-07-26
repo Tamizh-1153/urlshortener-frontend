@@ -13,7 +13,7 @@ const ResetPassword = () => {
 
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/reset_password/${param.id}/${param.token}`,
+        `https://urlshortener-backend-k3ro.onrender.com/api/v1/reset_password/${param.id}/${param.token}`,
         {
           password: e.target.password.value,
         }
