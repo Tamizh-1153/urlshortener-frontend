@@ -12,7 +12,7 @@ const ViewShortUrl = () => {
 
   const fetchData = async () => {
     await axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/${shortUrl}`, {
+      .get(`https://urlshortener-backend-k3ro.onrender.com/${shortUrl}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
