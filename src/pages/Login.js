@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/login`,
+      `https://urlshortener-backend-k3ro.onrender.com/api/v1/login`,
       {
         method: "POST",
         headers: {
