@@ -12,7 +12,7 @@ const Register = () => {
     e.preventDefault()
     
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/register`,
+      `https://urlshortener-backend-k3ro.onrender.com/api/v1/register`,
       {
         method: "POST",
         headers: {
