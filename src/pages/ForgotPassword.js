@@ -7,7 +7,7 @@ const ForgotPassword = () => {
     console.log(e.target.email.value)
 
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/forgot_password`, {
+      .post(`https://urlshortener-backend-k3ro.onrender.com/api/v1/forgot_password`, {
         email: e.target.email.value,
       })
       .then((response) => {
