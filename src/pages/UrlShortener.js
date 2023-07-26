@@ -13,7 +13,7 @@ const UrlShortner = () => {
 
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_URL}/shortUrl`,
+        `https://urlshortener-backend-k3ro.onrender.com/shortUrl`,
         { url: sendURL },
         {
           headers: {
